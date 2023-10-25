@@ -2,51 +2,170 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Checkbox Trickery: Form Disclosure</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="./style.css">
+  <title>Checkbox Trickery: Form Disclosure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
 
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  .sectionform {
+    margin-top: 30px;
+  }
+  
+  .sectionform::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  
+  
+  .inputf[type="email"], .textareaf {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 5px;
+    border: none;  
+    background-color: #d5d6e2;
+    font-family: inherit;
+    font-size: inherit;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+  }
+  
+  .inputf[type="email"]:focus, .textareaf:focus, .buttonf:focus {
+    outline: 2px solid #9ab593;
+  }
+  
+  .textareaf {
+    height: 100px;
+  }
+  
+  .inputf[type="checkbox"], .inputf[type="radio"] {
+    position: absolute;
+    left: -9999px;
+  }
+  
+  .side-label {
+    display: block;
+    position: relative;
+    margin: 10px 0;
+    padding-left: 35px;
+    cursor: pointer;
+  }
+  
+  .side-label::before, .side-label::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .inputf[type="radio"] + .side-label::before,
+  .inputf[type="radio"] + .side-label::after {
+    border-radius: 50%;
+  }
+  
+  .side-label::before {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgb(41, 39, 39);  
+  }
+  
+  .inputf:focus + .side-label::before {
+    border-color: #d7d7da;
+  }
+  
+  .side-label::after {
+    display: none;
+    width: 12px;
+    height: 12px;
+    margin: 4px;
+    background-color: #646466;
+  }
+  
+  .inputf:checked + .side-label::after {
+    display: block;
+  }
+  
+  .how-other-disclosure {
+    display: none;
+    margin: 10px 0 0 35px;
+  }
+  
+  #how-other:checked ~ .how-other-disclosure {
+    display: block;
+  }
+  
+  .blocked {
+    margin-top: 40px;
+    /*color: rgba(255, 255, 255, .3);*/
+    text-align: center;
+  }
+  
+  .buttonf {
+    display: none;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    margin: 40px auto 0;
+    padding: 5px 40px;  
+    color: rgb(0, 0, 0);
+    background-color: #d5d6e2;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  #permitted:checked ~ .blocked {
+    display: none;
+  }
+  
+  #permitted:checked ~ button {
+    display: block;
+  }
+  </style>
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<!--
-  Checkbox Trickery with CSS:
-  http://codersblock.com/blog/checkbox-trickery-with-css/ 
--->
 
-<div class="container">
-  <h1>
-    <span>Subscribe to</span><br>
-    Celery Facts Weekly!
+<div style="max-width: 500px;min-height: 100%;margin: 20px auto;padding: 10px 20px 40px;">
+  <h1 style=" margin: 0;padding-bottom: 30px;line-height: 1.2;font-size: 2.2em;font-weight: normal;">
+    <span style="font-size: .7em;">Subscribe to</span><br>
+    Big Ideas Facts Weekly!
   </h1>
-  <section>
+  <section class="sectionform">
     <label for="email" class="top-label">Email</label>
-    <input id="email" type="email" autocomplete="off">
+    <input id="email" type="email" autocomplete="off" class="inputf">
   </section>
-  <section>
+  <section class="sectionform">
     <label class="top-label">How did you hear about us?</label>
     
-    <input id="how-friend" name="how" type="radio">
+    <input id="how-friend" name="how" type="radio" class="inputf">
     <label for="how-friend" class="side-label">From a friend</label>
 
-    <input id="how-internet" name="how" type="radio">
+    <input id="how-internet" name="how" type="radio" class="inputf">
     <label for="how-internet" class="side-label">Somewhere on the internet</label>
 
-    <input id="how-other" name="how" type="radio">
+    <input id="how-other" name="how" type="radio" class="inputf">
     <label for="how-other" class="side-label">Other...</label>
     
     <div class="how-other-disclosure">
       <label for="how-other-explain" class="top-label">Please explain</label>
-      <textarea id="how-other-explain"></textarea>
+      <textarea id="how-other-explain" class="textareaf"></textarea>
     </div>
   </section>
-  <section>
-    <input id="permitted" type="checkbox">
+  <section class="sectionform">
+    <input id="permitted" type="checkbox" class="inputf">
     <label for="permitted" class="side-label">I am legally permitted to submit forms</label>
     <div class="blocked">(you have to check the checkbox to continue)</div>
-    <button>Submit</button>
+    <button class="buttonf">Submit</button>
   </section>
 </div>
-<!-- partial -->
+
   
 </body>
 </html>
